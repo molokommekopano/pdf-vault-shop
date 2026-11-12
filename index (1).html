@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover practical digital guides and downloadable PDF resources.">
+  <title>PDF Vault | Digital Guides</title>
+  <style>
+    :root {
+      --navy: #17243a;
+      --navy-2: #243650;
+      --cream: #f7f3eb;
+      --paper: #fffdf8;
+      --gold: #c49a52;
+      --ink: #202938;
+      --muted: #687386;
+      --line: #e8e1d5;
+      --shadow: 0 16px 40px rgba(23,36,58,.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .announcement {
+      background: var(--navy);
+      color: #f8f3e9;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(255,253,248,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: 1120px; margin: auto; padding: 17px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { font-weight: 850; letter-spacing: .13em; color: var(--navy); font-size: 17px; }
+    .brand span { color: var(--gold); }
+    .navlinks { display: flex; align-items: center; gap: 25px; font-size: 13px; color: #596477; }
+    .navlinks a:hover { color: var(--gold); }
+    .nav-cta, .button {
+      display: inline-flex; justify-content: center; align-items: center;
+      border: 0; border-radius: 999px; padding: 12px 19px;
+      background: var(--gold); color: #17243a; font-weight: 750;
+      font-size: 13px; cursor: pointer; transition: transform .2s, opacity .2s;
+    }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); opacity: .92; }
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(196,154,82,.19), transparent 27%),
+        linear-gradient(130deg, #17243a 0%, #263a55 100%);
+      color: white; overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1120px; margin: auto; padding: 86px 24px 92px;
+      display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 55px;
+    }
+    .eyebrow { color: #e0bd7f; text-transform: uppercase; letter-spacing: .2em; font-size: 11px; font-weight: 800; }
+    h1 { font-size: clamp(40px, 6vw, 67px); line-height: 1.04; letter-spacing: -.045em; margin: 18px 0; max-width: 650px; }
+    .hero p { color: #d3dbe5; max-width: 510px; font-size: 16px; margin-bottom: 28px; }
+    .hero .button { padding: 15px 23px; }
+    .hero-note { margin-top: 18px; color: #b9c3d0; font-size: 11px; }
+    .hero-art { display: flex; justify-content: center; align-items: center; min-height: 290px; }
+    .book {
+      width: 205px; height: 270px; border-radius: 7px 13px 13px 7px;
+      background: linear-gradient(145deg, #f8f1e3, #e6dcc9);
+      color: var(--navy); padding: 24px 20px; position: relative;
+      box-shadow: 18px 20px 0 rgba(0,0,0,.13), var(--shadow);
+      transform: rotate(-7deg);
+      border-left: 7px solid #d2c3a7;
+    }
+    .book:after { content: ""; position: absolute; inset: 13px; border: 1px solid rgba(196,154,82,.65); pointer-events: none; }
+    .book small { display: block; text-align: center; letter-spacing: .2em; font-size: 8px; margin-top: 8px; }
+    .book strong { display: block; text-align: center; font-family: Georgia, serif; font-size: 25px; line-height: 1.08; margin-top: 42px; }
+    .book em { display: block; text-align: center; color: #94723e; font-size: 9px; margin-top: 12px; }
+    .book .stitch { width: 60px; height: 60px; border: 1px solid #c49a52; border-radius: 50%; margin: 20px auto 0; display: grid; place-items: center; font-size: 24px; }
+    .section { max-width: 1120px; margin: auto; padding: 76px 24px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section h2 { color: var(--navy); font-size: clamp(28px, 4vw, 39px); line-height: 1.1; margin: 8px 0; letter-spacing: -.03em; }
+    .section-intro { color: var(--muted); max-width: 530px; margin: 0; font-size: 14px; }
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .product {
+      background: white; border: 1px solid var(--line); border-radius: 15px;
+      overflow: hidden; box-shadow: 0 7px 24px rgba(23,36,58,.04);
+      display: flex; flex-direction: column;
+    }
+    .product-cover {
+      min-height: 205px; padding: 24px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(140deg, #e9e2d5, #f7f3eb);
+    }
+    .mini-book {
+      width: 125px; min-height: 158px; background: var(--navy); color: white;
+      padding: 17px 12px; text-align: center; box-shadow: 8px 8px 0 rgba(23,36,58,.13);
+      border-left: 5px solid #40536d; display: flex; flex-direction: column; justify-content: center;
+    }
+    .mini-book .mini-label { color: #e2bd7c; font-size: 7px; letter-spacing: .15em; text-transform: uppercase; }
+    .mini-book strong { font-family: Georgia, serif; font-size: 18px; line-height: 1.12; margin: 15px 0; }
+    .mini-book small { font-size: 8px; color: #d7deea; }
+    .product-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .tag { color: #9a743d; text-transform: uppercase; letter-spacing: .13em; font-size: 9px; font-weight: 800; }
+    .product h3 { color: var(--navy); margin: 8px 0; font-size: 18px; line-height: 1.25; }
+    .product p { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .product-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; }
+    .price { color: var(--navy); font-size: 17px; font-weight: 850; }
+    .order-button { border-radius: 999px; padding: 10px 14px; font-size: 11px; }
+    .how { background: var(--cream); }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 30px; }
+    .step { background: var(--paper); border: 1px solid var(--line); border-radius: 13px; padding: 24px; }
+    .step-num { width: 33px; height: 33px; border-radius: 50%; background: var(--navy); color: #e5c58e; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
+    .step h3 { color: var(--navy); font-size: 16px; margin: 15px 0 7px; }
+    .step p { color: var(--muted); font-size: 13px; margin: 0; }
+    .faq { max-width: 780px; }
+    details { border-bottom: 1px solid var(--line); padding: 17px 0; }
+    summary { cursor: pointer; color: var(--navy); font-weight: 750; font-size: 14px; }
+    details p { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
+    .contact-box { background: var(--navy); color: white; border-radius: 18px; padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .contact-box h2 { color: white; font-size: 27px; margin: 0 0 8px; }
+    .contact-box p { color: #d0d8e2; font-size: 13px; margin: 0; }
+    footer { background: #111c2d; color: #aeb8c7; padding: 27px 24px; text-align: center; font-size: 11px; }
+    footer strong { color: white; letter-spacing: .12em; }
+    .fineprint { font-size: 10px; color: #7f8b9b; margin-top: 8px; }
+    @media (max-width: 760px) {
+      .nav { padding: 14px 18px; }
+      .navlinks { gap: 13px; font-size: 11px; }
+      .nav-cta { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 62px 22px 55px; gap: 20px; }
+      .hero-art { min-height: 245px; }
+      .book { transform: rotate(-4deg) scale(.88); }
+      .section { padding: 58px 19px; }
+      .section-head { display: block; }
+      .products, .steps { grid-template-columns: 1fr; }
+      .product-cover { min-height: 185px; }
+      .contact-box { display: block; padding: 27px; }
+      .contact-box .button { margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">PRACTICAL DIGITAL GUIDES • SIMPLE ORDERING • INSTANTLY SHAREABLE PDFs</div>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#">PDF<span>VAULT</span></a>
+      <div class="navlinks">
+        <a href="#shop">Shop</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="nav-cta" href="#shop">Explore PDFs</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Learn something. Make something.</div>
+          <h1>Useful guides.<br>One simple download.</h1>
+          <p>Explore practical PDF guides designed to help you learn new skills and bring your ideas to life — at your own pace, from home.</p>
+          <a class="button" href="#shop">Browse the collection&nbsp; →</a>
+          <div class="hero-note">Digital products • No physical delivery</div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a sewing guide book">
+          <div class="book">
+            <small>THE PRACTICAL GUIDE SERIES</small>
+            <strong>SEW YOUR<br>OWN SWEATER</strong>
+            <em>A BEGINNER-FRIENDLY GUIDE</em>
+            <div class="stitch">✦</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The collection</div>
+          <h2>Shop digital guides</h2>
+        </div>
+        <p class="section-intro">Choose a guide, send an order request and receive the PDF after your payment has been confirmed.</p>
+      </div>
+      <div class="products" id="product-list"></div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="section">
+        <div class="eyebrow">A simple process</div>
+        <h2>How ordering works</h2>
+        <p class="section-intro">A straightforward manual checkout that does not require a paid online-store subscription or payment gateway.</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">01</div><h3>Choose your PDF</h3><p>Browse the collection and tap the order button on the guide you want.</p></div>
+          <div class="step"><div class="step-num">02</div><h3>Arrange payment</h3><p>You'll receive a reply with payment instructions. Pay by EFT using the details supplied privately.</p></div>
+          <div class="step"><div class="step-num">03</div><h3>Receive your guide</h3><p>Once payment is confirmed, the seller sends your PDF by email or WhatsApp.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="eyebrow">Good to know</div>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Are these physical books?</summary><p>No. Products in this shop are digital PDF files. Nothing will be shipped to your address.</p></details>
+      <details><summary>How do I receive my PDF?</summary><p>After your payment is confirmed, the seller will send the PDF to the email address or WhatsApp contact you provide.</p></details>
+      <details><summary>Can I get a refund?</summary><p>Please ask the seller about the refund policy before paying. The seller should publish a clear policy that follows applicable consumer-protection rules.</p></details>
+      <details><summary>Is checkout automatic?</summary><p>No. This starter website uses manual order requests and payment confirmation. It does not collect card details or automatically deliver files.</p></details>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="contact-box">
+        <div><h2>Need help with an order?</h2><p>Send a message and include the name of the PDF you are interested in.</p></div>
+        <a class="button" id="contact-button" href="#shop">Contact the shop&nbsp; →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>PDF VAULT</strong>
+    <div>Digital guides for curious minds and creative hands.</div>
+    <div class="fineprint">© <span id="year"></span> PDF Vault. Replace this name with your own shop name before publishing.</div>
+  </footer>
+
+  <script>
+    /*
+      QUICK SETUP:
+      1. Replace the WhatsApp number below with your number, including country code.
+         South African example format: 27XXXXXXXXX (no +, spaces or leading 0).
+      2. Edit the PRODUCTS list to add your PDF titles, descriptions and prices.
+      3. Keep your actual PDF files private until payment is confirmed.
+    */
+    const WHATSAPP_NUMBER = "27761906897"; // Replace this placeholder.
+    const SHOP_NAME = "PDF Vault";
+
+    const PRODUCTS = [
+      {
+        title: "How to Sew a Sweater at Home",
+        category: "Sewing guide",
+        description: "A beginner-friendly guide for parents who want to learn how to sew sweaters and make clothing at home.",
+        price: "R129.99",
+        coverTitle: "SEW YOUR OWN SWEATER",
+        coverNote: "A BEGINNER-FRIENDLY GUIDE"
+      }
+      // Add more products by copying this format:
+      // ,{
+      //   title: "Your next PDF title",
+      //   category: "Your category",
+      //   description: "A short description of your PDF.",
+      //   price: "R99",
+      //   coverTitle: "YOUR PDF",
+      //   coverNote: "DIGITAL GUIDE"
+      // }
+    ];
+
+    const productList = document.getElementById("product-list");
+    PRODUCTS.forEach((product) => {
+      const card = document.createElement("article");
+      card.className = "product";
+      const cover = document.createElement("div");
+      cover.className = "product-cover";
+      const miniBook = document.createElement("div");
+      miniBook.className = "mini-book";
+      const label = document.createElement("span");
+      label.className = "mini-label";
+      label.textContent = product.category;
+      const coverTitle = document.createElement("strong");
+      coverTitle.textContent = product.coverTitle || product.title;
+      const coverNote = document.createElement("small");
+      coverNote.textContent = product.coverNote || "DIGITAL PDF";
+      miniBook.append(label, coverTitle, coverNote);
+      cover.append(miniBook);
+
+      const body = document.createElement("div");
+      body.className = "product-body";
+      const tag = document.createElement("div");
+      tag.className = "tag";
+      tag.textContent = product.category;
+      const title = document.createElement("h3");
+      title.textContent = product.title;
+      const description = document.createElement("p");
+      description.textContent = product.description;
+      const bottom = document.createElement("div");
+      bottom.className = "product-bottom";
+      const price = document.createElement("div");
+      price.className = "price";
+      price.textContent = product.price;
+      const button = document.createElement("button");
+      button.className = "button order-button";
+      button.type = "button";
+      button.textContent = "Order via WhatsApp";
+      button.addEventListener("click", () => {
+        if (!/^27\d{9}$/.test(WHATSAPP_NUMBER)) {
+          alert("The shop owner needs to add their WhatsApp number in the website setup section before orders can be sent.");
+          return;
+        }
+        const message = `Hi! I'd like to order "${product.title}" from ${SHOP_NAME}. The listed price is ${product.price}. Please send me the payment instructions.`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+      });
+      bottom.append(price, button);
+      body.append(tag, title, description, bottom);
+      card.append(cover, body);
+      productList.append(card);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("contact-button").addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!/^27\d{9}$/.test(WHATSAPP_NUMBER)) {
+        alert("27761906897file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit%20user%20files/Sample%20project%20-%20Acme/index.html#shop.");
+        return;
+      }
+      const message = `Hi! I have a question about ${SHOP_NAME}.`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
+file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit%20user%20files/Sample%20project%20-%20Acme/index.html#shop
